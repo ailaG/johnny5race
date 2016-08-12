@@ -9,13 +9,7 @@ if(Math.random()>0.5){
  console.log("hello");
   $(".adder").click(function(){
        $.ajax({url: "http://dev.galiaba.com/chen.php",
-  $("button").click(function(){
-       $.ajax({
-       		url: "http://dev.galiaba.com/chen.php",
        		success: function(result){
            		$("#team").html(result);
         	}});
-           		$("#div1").html(result);
-        	}
-        });
     });
