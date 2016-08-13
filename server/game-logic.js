@@ -1,8 +1,8 @@
 "use strict"
 
 // Misc
-var sleep_lib = require('sleep');
-var sleep = sleep_lib.sleep;
+var sleep_lib = require('sleep'),
+	sleep = sleep_lib.sleep;
 
 // Load Johnny-Five
 var five = require('johnny-five');
@@ -26,6 +26,10 @@ app.get('/', function (req, res) {
 	if (team=='A' || team=='B') {
 		advance(team);
 	}
+
+	res.status(200);
+	res.header('Access-Control-Allow-Origin', '*');
+	res.send('Advanced team ' + team + '!');
 });
 
 app.listen(3000, function () {
@@ -40,6 +44,9 @@ var led_ids = {
 	'B' : [2,3,4,5,6]
 }
 var leds;
+
+var speaker,
+	piezo_pin = 11;
 
 var is_game_on = true;
 var scores = {
@@ -72,15 +79,23 @@ function updateLights(team, count) {
 		eventEmitter.emit('game_over', team)
 	} else {
 		console.log('blinking ' + (count) + ' led # ' + leds[team][count].pin);
-		//leds[team][count].blink(); //TODO
+		leds[team][count].blink(); //TODO
 	}
 
 }
 
 eventEmitter.on('game_over', (team) => {
 	console.log('Team ' + team + ' won!');
+	speaker = new five.Piezo(piezo_pin);
 })
 
+eventEmitter.on('score_change', () => {
+	console.log('Score changed');
+	if (is_game_on) // todo
+		updateLights('A', scores['A']);
+	if (is_game_on) // todo
+		updateLights('B', scores['B']);
+})
 
 
 board.on("ready", () => {
@@ -89,42 +104,19 @@ board.on("ready", () => {
 		'A' : led_ids['A'].map((id) => new five.Led(id)),
 		'B' : led_ids['B'].map((id) => new five.Led(id))
 	}
-	// leds = {
-	// 	'A' : new five.Leds(led_ids['A']),
-	// 	'B' : new five.Leds(led_ids['B'])
-	// }
 
 	// Test LEDs
 	// for (let led of leds.A.concat(leds.B)) {
 	// 	led.on();
 	// }
-//	sleep(1);
+	//	sleep(1);
 
 	// Reset LEDs
-	console.log('All off');
-	for (let led of leds.A.concat(leds.B)) {
-		led.stop().off();
-	}
-
-	eventEmitter.on('score_change', () => {
-		console.log('Score changed');
-		if (is_game_on) // todo
-			updateLights('A', scores['A']);
-		if (is_game_on) // todo
-			updateLights('B', scores['B']);
-	})
+	updateLights('A',0);
+	updateLights('B',0);
+	console.log("Game logic ready!");
 
 
-	// setTimeout(advance('A'), 10);
-	// sleep(1);
-	// setTimeout(advance('A'), 10);
-	// sleep(1);
-	// setTimeout(advance('B'));
-	// sleep(1);
-	// setTimeout(advance('A'));
-	// sleep(1);
-	// setTimeout(advance('A'));
-	// sleep(1);
-	// setTimeout(advance('A'));
+
 })
 

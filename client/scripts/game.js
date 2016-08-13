@@ -8,11 +8,16 @@ if(choice>0.5){
 
  }
 
+ $("#team").text("You're on team " + team);
+
  
   $(".adder").click(function(){
-       $.ajax({url: "http://dev.galiaba.com/chen.php",
+       $.ajax({
+       		//url: "http://dev.galiaba.com/chen.php",
+       		url: "http://localhost:3000/",
        	   data:{"team":team},
        		success: function(result){
-           		$("#team").html(result);
+           		//$("#team").html(result);
+           		console.log("Sent click!");
         	}});
     });
