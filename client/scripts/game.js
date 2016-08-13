@@ -11,10 +11,10 @@ if(choice>0.5){
  $("#team").text("You're on team " + team);
 
  
-  $(".adder").click(function(){
+  $(".adder").on('click tap', function(){
        $.ajax({
        		//url: "http://dev.galiaba.com/chen.php",
-       		url: "http://localhost:3000/",
+       		url: "http://192.168.0.107:3000/",
        	   data:{"team":team},
        		success: function(result){
            		//$("#team").html(result);

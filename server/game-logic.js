@@ -14,9 +14,9 @@ const eventEmitter = new events();
 
 // Express - handle AJAX
 var express = require('express');
-var app = express();
+var webserver = express();
 
-app.get('/', function (req, res) {
+webserver.get('/', function (req, res) {
   var url = require('url');
 //  res.send('Got team!');
 	var url_parts = url.parse(req.url, true);
@@ -32,12 +32,14 @@ app.get('/', function (req, res) {
 	res.send('Advanced team ' + team + '!');
 });
 
-app.listen(3000, function () {
+webserver.listen(3000, function () {
   console.log('Listening on port 3000!');
 });
 
 
 // Global stuff
+
+var advance_step = 2;
 
 var led_ids = {
 	'A' : ['A5','A4','A3','A2','A1'],
@@ -54,6 +56,9 @@ var scores = {
 	B : 0
 }
 
+
+
+// Helper functions
 function advance(team) {
 	console.log('Advance ' + team);
 	scores[team]++;
@@ -76,7 +81,7 @@ function updateLights(team, count) {
 	if (count >= leds[team].length) {
 		// Win
 		is_game_on = false;
-		eventEmitter.emit('game_over', team)
+		eventEmitter.emit('game_won', team)
 	} else {
 		console.log('blinking ' + (count) + ' led # ' + leds[team][count].pin);
 		leds[team][count].blink(); //TODO
@@ -84,17 +89,23 @@ function updateLights(team, count) {
 
 }
 
-eventEmitter.on('game_over', (team) => {
+// Event handling
+
+eventEmitter.on('game_won', (team) => {
 	console.log('Team ' + team + ' won!');
 	speaker = new five.Piezo(piezo_pin);
+	leds[team].forEach((led) => {
+		led.strobe(500);
+	});
+	webserver.close();
 })
 
 eventEmitter.on('score_change', () => {
 	console.log('Score changed');
 	if (is_game_on) // todo
-		updateLights('A', scores['A']);
+		updateLights('A', Math.floor(scores['A'] / advance_step));
 	if (is_game_on) // todo
-		updateLights('B', scores['B']);
+		updateLights('B', Math.floor(scores['B'] / advance_step));
 })
 
 
