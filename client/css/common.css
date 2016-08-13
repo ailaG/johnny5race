@@ -1,33 +1,26 @@
+body {
+  background-color: lightblue;
+  text-align: center;
+}
+
 .adder {
-	padding: 15px 25px;
-    border-radius: 100%;
-	width: 200px;
-	height: 200px; 
-	cursor: pointer;
-    position: relative;
-    outline: none;
-    top: 100px;
-    left: 100px;
-     text-align: center;
-     display: inline-block;
-    font-size:16px;
-   background-color:#FF0000;
-   user-select:none;
-   
-    font-size: 16px;
-   background-color: #FF0000;
+  background-color:#FF0000;
+  border-radius: 100%;
+  cursor: pointer;
+  display: inline-block;
+  font-size:16px;
+  height: 200px; 
+  left: 100px;
+  outline: none;
+  padding: 15px 25px;
+  text-align: center;
+  top: 100px;
+  user-select:none;
+  width: 200px;
 }
 
 .adder:active {
   box-shadow: 0 5px #666;
   transform: translateY(4px);
 }
-#team{
-	position: relative;
-	top: 100px;
-    left: 100px;
-}
 
-body {
-    background-color: lightblue;
-}
