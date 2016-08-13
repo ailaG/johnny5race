@@ -2,6 +2,7 @@ var choice=Math.random();
 var team;
 var adderButton = $(".adder");
 
+// Choose team
 if(choice>0.5){
 	 team="B";
       }
@@ -10,7 +11,17 @@ if(choice>0.5){
 
  }
 
- $("#team").text("You're on team " + team);
+$("#team").text("You're on team " + team);
+switch (team) {
+	case 'A':
+		$('body').css('background-color', '#f5f392');
+		break;
+	case 'B':
+		$('body').css('background-color', '#37ab3c');
+		break;
+}
+
+
 
  
  adderButton.on('click tap', function(){
