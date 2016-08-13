@@ -39,7 +39,12 @@ webserver.listen(3000, function () {
 
 // Global stuff
 
-var advance_step = 2;
+var advance_step = 1;
+if (process.argv[2] !== undefined && !isNaN(parseInt(process.argv[2])))
+	advance_step = parseInt(process.argv[2]);
+if (advance_step < 1)
+	advance_step = 1;
+console.log('Advances lights every ', advance_step, ' steps');
 
 var led_ids = {
 	'A' : ['A5','A4','A3','A2','A1'],
@@ -75,7 +80,6 @@ function updateLights(team, count) {
 	}
 
 	for (let i=0; i<count; i++) {
-		console.log('turning on ' + leds[team][i].pin);
 		leds[team][i].on();
 	}
 	if (count >= leds[team].length) {
@@ -83,7 +87,6 @@ function updateLights(team, count) {
 		is_game_on = false;
 		eventEmitter.emit('game_won', team)
 	} else {
-		console.log('blinking ' + (count) + ' led # ' + leds[team][count].pin);
 		leds[team][count].blink(); //TODO
 	}
 
