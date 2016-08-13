@@ -26,7 +26,7 @@ switch (team) {
  
  adderButton.on('click tap', function(){
        $.ajax({
-       		url: "http://192.168.0.107:3000/",
+       		url: "http://10.0.0.1:3000/",
        	   data:{"team":team},
        		success: function(result){
            		console.log("Sent click!");
