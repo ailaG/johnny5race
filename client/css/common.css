@@ -1,0 +1,18 @@
+.adder {
+    border-radius: 100%;
+	width: 200px;
+	height: 200px; 
+    position: relative;
+    top: 100px;
+    left: 100px;
+     text-align: center;
+     display: inline-block;
+    font-size: 16px;
+   background-color: #FF0000;
+}
+
+#team{
+	position: relative;
+	top: 100px;
+    left: 100px;
+}
