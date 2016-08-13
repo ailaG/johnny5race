@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/ailaG/johnny5race#readme",
   "dependencies": {
-    "johnny-five": "^0.10.0"
+    "express": "^4.14.0",
+    "johnny-five": "^0.10.0",
+    "sleep": "^3.0.1"
   }
 }
