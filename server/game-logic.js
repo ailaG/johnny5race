@@ -94,10 +94,11 @@ function updateLights(team, count) {
 eventEmitter.on('game_won', (team) => {
 	console.log('Team ' + team + ' won!');
 	speaker = new five.Piezo(piezo_pin);
+	speaker.play({song:[['c4'],['d4'],['e4'],['c5']]});
 	leds[team].forEach((led) => {
 		led.strobe(500);
 	});
-	webserver.close();
+	//webserver.close();
 })
 
 eventEmitter.on('score_change', () => {
