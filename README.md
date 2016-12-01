@@ -6,4 +6,13 @@ Load the game on everyone's phones. Teams will be picked in random, make sure yo
 SETUP:
 Connect the Arduino to your computer, wire up the circuit accordingly.
 
-TODO: currently uses hardcoded IP address.
+TODO: 
+- Currently uses hardcoded IP address.
+- Support any number>=1 of teams
+- Let user pick team
+- Make sure teams are picked in an even way?
+
+- Make video and draw circuit for github
+
+
+
