@@ -8,7 +8,7 @@ Connect the Arduino to your computer, wire up the circuit accordingly.
 
 TODO: 
 - Currently uses hardcoded IP address.
-- Support any number>=1 of teams
+- Support any number>=1 of teams? Think how to do that in hardware
 - Let user pick team
 - Make sure teams are picked in an even way?
 
