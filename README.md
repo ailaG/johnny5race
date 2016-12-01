@@ -11,6 +11,8 @@ TODO:
 - Support any number>=1 of teams? Think how to do that in hardware
 - Let user pick team
 - Make sure teams are picked in an even way?
+- Only start lights after both webserver and board are ready
+- Handle webserver and board errors
 
 - Make video and draw circuit for github
 
