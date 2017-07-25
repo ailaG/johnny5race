@@ -1,3 +1,5 @@
+[Client](client/game.html)
+
 Racing game that uses your phones, an Arduino and a computer.
 
 GAMEPLAY:
